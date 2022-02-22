@@ -14,10 +14,17 @@ def subtract(x, y):
 def multiply(x, y):
     return x * y
 
-# This function divides two numbers1
-
+# This function divides two numbers
 def divide(x, y):
     return x / y
+
+# Test whether input is a valid num
+def isfloat(num):
+    try:
+        float(num)
+        return True
+    except ValueError:
+        return False
 
 
 print("Select operation.")
@@ -29,18 +36,32 @@ print("5.Exit")
 
 import csv
 
-with open('data.csv', mode='w') as data:
-    data_writer = csv.writer(data, delimiter=',', quotechar='"')
-    data_writer.writerow(["First Number", "Sign", "Second Number", "" , "result","Date and Time"])
+# with open('data.csv', mode='w') as data:
+#     data_writer = csv.writer(data, delimiter=',', quotechar='"')
+#     data_writer.writerow(["First Number", "Sign", "Second Number", "result","Date and Time"])
 
 while True:
         # Take input from the user
         choice = input("Enter choice(1/2/3/4/5): ")
-
+        
         # Check if choice is one of the four options
-        if choice in ('1', '2', '3', '4'):
-            num1 = float(input("Enter first number: "))
-            num2 = float(input("Enter second number: "))
+        if (choice == '1' or choice == '2' or choice == '3' or choice == '4'):
+            print("check")
+            while True: 
+                num1 = input("Enter first number: ")
+                if (isfloat(num1)):
+                    num1 = float(num1)
+                    break
+                else:
+                    print("Invalid input! Input must be a valid number!")
+                    
+            while True:
+                num2 = input("Enter second number: ")
+                if (isfloat(num2)):
+                    num2 = float(num2)
+                    break
+                else:
+                    print("Invalid input! Input must be a valid number!")
 
 
             if choice == '1':
@@ -68,13 +89,13 @@ while True:
 
             with open('data.csv', mode='a') as data:
                 data_writer = csv.writer(data, delimiter=',', quotechar='"')
-                data_writer.writerow([num1, choice, num2,"=", result, y])
+                data_writer.writerow([str(num1)+" "+choice+" "+str(num2)+" ""="+" "+str(result), y])
 
         elif choice == '5':
+            print("exited")
             break
-
-
-else:
-            print("invalid number")
+    
+        else:
+            print("Please select 1 of the 5 given options!")
         # write num1, num2, choice, current date time to the csv file
 
